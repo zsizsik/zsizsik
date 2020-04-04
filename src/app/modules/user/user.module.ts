@@ -10,6 +10,7 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
   imports: [
     CommonModule,
     HttpClientModule
-  ]
+  ],
+
 })
 export class UserModule { }

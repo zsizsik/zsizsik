@@ -1,5 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { } from 'jest';
+import { of } from 'rxjs';
+import { User } from '../../../model/user';
 import { UserService } from '../../../services/user/user.service';
 import { UserListComponent } from './user-list.component';
 
@@ -8,11 +10,16 @@ describe('UserListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
 
+  // mock userService.list to return given value 
+  let users: User[] = [new User()];
+  let userService = {
+    list: jest.fn().mockReturnValue(of(users))
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [UserListComponent],
-      providers: [UserService],
-      imports: [HttpClientModule],
+      providers: [{ provide: UserService, useValue: userService }],
     })
       .compileComponents();
   }));
@@ -27,5 +34,5 @@ describe('UserListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  
+
 });
